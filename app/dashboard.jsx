@@ -8,7 +8,7 @@ export default function Dashboard() {
   );
 }
 
-// ✅ THIS WAS MISSING
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

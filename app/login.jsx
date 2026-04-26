@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Image,
 } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
@@ -14,7 +15,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // ✅ add loading
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -29,7 +30,7 @@ export default function Login() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json", // ✅ important
+          Accept: "application/json",
         },
         body: JSON.stringify({
           email: email.trim(),
@@ -39,18 +40,13 @@ export default function Login() {
 
       const data = await response.json();
 
-      console.log("API Response:", data); // ✅ debug
-
       if (response.ok) {
         Alert.alert("Success", "Login Successful");
-
-        // ✅ Navigate to dashboard
         router.replace("/dashboard");
       } else {
         Alert.alert("Login Failed", data.message || "Invalid credentials");
       }
     } catch (error) {
-      console.log("Login Error:", error);
       Alert.alert("Error", "Network error. Try again.");
     } finally {
       setLoading(false);
@@ -59,6 +55,13 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
+      
+      {/* 🔥 LOGO */}
+      <Image
+        source={require("../assets/images/icon.png")}
+        style={styles.image}
+      />
+
       <Text style={styles.title}>Login</Text>
 
       <TextInput
@@ -87,6 +90,8 @@ export default function Login() {
           {loading ? "Logging in..." : "Login"}
         </Text>
       </TouchableOpacity>
+     
+
     </View>
   );
 }
@@ -96,27 +101,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",   // ✅ center everything
     padding: 20,
     backgroundColor: "#fff",
   },
+
+  image: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+    borderRadius: 20,
+  },
+
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 30,
-    textAlign: "center",
+    marginBottom: 25,
   },
+
   input: {
+    width: "100%",           // ✅ full width
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 12,
     borderRadius: 8,
     marginBottom: 15,
   },
+
   button: {
+    width: "100%",           // ✅ full width
     backgroundColor: "#2e7d32",
     padding: 15,
     borderRadius: 10,
   },
+
   buttonText: {
     color: "#fff",
     textAlign: "center",
