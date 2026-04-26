@@ -77,7 +77,7 @@ export default function Home() {
 
       {/* Tagline */}
       <Text style={styles.tagline}>
-        Powered by <Text style={{ color: ACCENT_GOLD }}>TGW Global Workforce</Text>
+        Powered by <Text style={{ color: ACCENT_GOLD }}>Techflora Global Workforce Pvt Ltd</Text>
       </Text>
 
       {/* Stats */}
